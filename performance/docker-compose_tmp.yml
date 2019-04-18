@@ -18,7 +18,7 @@ services:
     links:
       - master
     volumes:
-      - /Users/xumin/jo/daoshop-script/performance:/locust
+      - filepath:/locust
     command:
       -f dmp_test.py --slave  --master-host=master --no-reset-stats
 
@@ -28,6 +28,6 @@ services:
     links:
       - master
     volumes:
-      - /Users/xumin/jo/daoshop-script/performance:/locust
+      - filepath:/locust
     command:
       -f dmp_test.py --slave  --master-host=master --no-reset-stats
