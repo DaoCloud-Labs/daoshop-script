@@ -1,0 +1,33 @@
+version: '3'
+services:
+  master:
+    image: christianbladescb/locustio
+    ports:
+      - 8089:8089
+      - 5557:5557
+      - 5558:5558
+    volumes:
+      - filepath:/locust
+    container_name: master
+    command:
+      -f dmp_test.py --master --no-reset-stats
+
+  slave1:
+    image: christianbladescb/locustio
+    container_name: slave1
+    links:
+      - master
+    volumes:
+      - /Users/xumin/jo/daoshop-script/performance:/locust
+    command:
+      -f dmp_test.py --slave  --master-host=master --no-reset-stats
+
+  slave2:
+    image: christianbladescb/locustio
+    container_name: slave2
+    links:
+      - master
+    volumes:
+      - /Users/xumin/jo/daoshop-script/performance:/locust
+    command:
+      -f dmp_test.py --slave  --master-host=master --no-reset-stats
